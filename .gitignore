@@ -1,0 +1,46 @@
+# Ignorar dependencias locales
+node_modules
+.pnpm
+.yarn/cache
+
+# Yarn workspace (permitir lo que sí necesitas)
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# env files
+.env*
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# bun
+bun.lockb
+
+# evitar conflicto en entorno Docker
+package-lock.json

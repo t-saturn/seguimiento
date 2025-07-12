@@ -1,0 +1,22 @@
+services:
+  seguimiento_gra:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_TURNSTILE_SITE_KEY: ${NEXT_PUBLIC_TURNSTILE_SITE_KEY}
+        NEXTAUTH_URL: ${NEXTAUTH_URL}
+    container_name: seguimiento_gra
+    restart: always
+    environment:
+      - NODE_ENV=production
+    env_file:
+      - ./envs/.env.gra
+    ports:
+      - "4004:3000"
+    networks:
+      - web
+
+networks:
+  web:
+    driver: bridge
