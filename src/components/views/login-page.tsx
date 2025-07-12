@@ -4,7 +4,6 @@ import { Mail, Lock, Eye, EyeOff, OctagonAlert } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ThemeToggle } from "../theme/theme-toogle";
 import Image from "next/image";
 import { signInSchema } from "@/utils/zod/schemas";
 import { z } from "zod";
@@ -73,7 +72,6 @@ export default function LoginPage({
               />
               <span className="text-lg font-bold text-primary">Kimbiri SGD</span>
             </Link>
-            <ThemeToggle />
           </div>
 
           {/* Welcome message */}
@@ -162,11 +160,6 @@ export default function LoginPage({
               Volver al inicio
             </Link>
           </div>
-        </div>
-
-        {/* Footer */}
-        <div className="text-center mt-6 text-sm text-muted-foreground">
-          © {new Date().getFullYear()} Municipalidad de Kimbiri
         </div>
       </div>
     </div>

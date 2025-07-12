@@ -2,87 +2,140 @@
 
 import LoginContainer from "./login-container";
 import Image from "next/image";
-import { ThemeToggle } from "@/components/theme/theme-toogle";
 import Link from "next/link";
+import { motion, Variants } from "framer-motion";
+import { ThemeToggle } from "@/components/theme/theme-toogle";
 
 function Page() {
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut",
+        when: "beforeChildren",
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5, ease: "easeOut" },
+    },
+  };
+
+  const slideVariants: Variants = {
+    hidden: { x: -100, opacity: 0 },
+    visible: {
+      x: 0,
+      opacity: 1,
+      transition: { duration: 0.8, ease: "easeOut" },
+    },
+  };
+
+  const slideRightVariants: Variants = {
+    hidden: { x: 100, opacity: 0 },
+    visible: {
+      x: 0,
+      opacity: 1,
+      transition: { duration: 0.8, ease: "easeOut" },
+    },
+  };
+
   return (
-    <div className="min-h-screen grid grid-cols-1 lg:grid-cols-2 bg-transparent text-foreground transition-colors duration-300 ease-in-out overflow-hidden">
-
+    <motion.div
+      className="min-h-screen grid grid-cols-1 lg:grid-cols-2 bg-background text-foreground transition-colors duration-500 ease-in-out overflow-hidden relative"
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+    >
       {/* Lado izquierdo: Branding institucional */}
-      <div className="relative hidden lg:flex flex-col justify-between bg-transparent p-10 text-primary dark:text-primary overflow-hidden">
-
+      <motion.div
+        className="relative hidden lg:flex flex-col bg-gradient-to-br from-primary/20 via-accent/10 to-background p-12 text-primary dark:text-primary-foreground overflow-hidden"
+        variants={slideVariants}
+      >
         {/* Imagen de fondo decorativa */}
-        <div className="absolute inset-0 -z-10 pointer-events-none">
+        <div className="absolute inset-0 pointer-events-none">
           <Image
             src="/images/inicio_fondo_sgd.jpg"
-            alt="Decoración izquierda"
+            alt="Fondo Municipalidad de Kimbiri"
             fill
-            className="object-cover blur-md brightness-75 transition-all duration-500"
+            className="object-cover brightness-90 transition-all duration-700"
             priority
           />
-          <div className="absolute inset-0 bg-white/20 dark:bg-black/30 backdrop-blur-sm" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent dark:from-black/70 dark:to-transparent backdrop-blur-md" />
         </div>
 
         {/* Encabezado institucional */}
-        <div className="flex items-center justify-between animate-fade-in-down">
+        <motion.div variants={itemVariants} className="flex items-center justify-between z-10">
           <Link href="/" className="flex items-center gap-4 hover:scale-105 transition-transform duration-300">
             <Image
               src="/images/logo.png"
               alt="Logo Municipalidad de Kimbiri"
-              width={52}
-              height={52}
-              className="rounded-full shadow-lg"
+              width={64}
+              height={64}
+              className="rounded-full shadow-xl border-4 border-primary/30 hover:border-primary/50 transition-all duration-300"
             />
             <div>
-              <h1 className="text-xl font-extrabold uppercase tracking-wide">
+              <h1 className="text-3xl font-extrabold uppercase tracking-widest text-primary drop-shadow-md">
                 Municipalidad Distrital
               </h1>
-              <p className="text-sm text-foreground/90">Kimbiri · Gestión Documentaria</p>
+              <p className="text-base font-semibold text-foreground/90">Kimbiri · Gestión Documentaria</p>
             </div>
           </Link>
           <ThemeToggle />
-        </div>
+        </motion.div>
 
-        {/* Mensaje institucional */}
-        <div className="space-y-6 mt-20 animate-fade-in">
-          <h2 className="text-3xl font-bold leading-snug drop-shadow-sm">
-            “Sistema integral para el seguimiento eficiente de documentos.”
+        {/* Espaciador flexible */}
+        <div className="flex-grow" />
+
+        {/* Mensaje institucional en la parte inferior */}
+        <motion.div variants={itemVariants} className="space-y-6 mt-16 z-10">
+          <h2 className="text-3xl font-bold leading-tight drop-shadow-lg text-primary">
+            Sistema integral para el seguimiento eficiente de documentos.
           </h2>
-          <p className="text-sm text-foreground/80 leading-relaxed">
-            Plataforma moderna diseñada para facilitar el control y la trazabilidad de trámites administrativos.
+          <p className="text-base text-foreground dark:text-muted-foreground leading-relaxed max-w-lg">
+            Plataforma innovadora que optimiza la gestión y trazabilidad de trámites administrativos, garantizando transparencia, seguridad y accesibilidad para todos los ciudadanos.
           </p>
-        </div>
+        </motion.div>
 
         {/* Pie de sección */}
-        <div className="text-sm text-foreground/70 mt-16 animate-fade-in-up">
-          © {new Date().getFullYear()} Municipalidad de Kimbiri · Todos los derechos reservados
-        </div>
+        <motion.div variants={itemVariants} className="text-sm text-muted-foreground dark:text-muted-foreground mt-10 z-10">
+          © {new Date().getFullYear()} Municipalidad Distrital de Kimbiri · Todos los derechos reservados
+        </motion.div>
+      </motion.div>
+
+      {/* Divisor animado entre las dos columnas */}
+      <div className="absolute top-0 left-1/2 h-full w-1 bg-gradient-to-b from-primary/20 via-accent/40 to-primary/20 z-20 hidden lg:block transform -translate-x-1/2">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/60 to-transparent animate-pulse" />
       </div>
 
       {/* Lado derecho: Contenedor del formulario */}
-      <div className="relative flex flex-col justify-center px-6 sm:px-12 bg-white dark:bg-neutral-900 transition-all duration-500 animate-fade-in overflow-hidden">
+      <motion.div
+        className="relative flex flex-col justify-center px-6 sm:px-16 bg-background dark:bg-neutral-900 transition-all duration-500"
+        variants={slideRightVariants}
+      >
+        {/* Efecto de transición suave en el borde */}
+        <div className="absolute top-0 left-0 h-full w-8 bg-gradient-to-r from-primary/10 to-transparent z-10 hidden lg:block" />
 
-        {/* Ola vertical decorativa al borde izquierdo de esta columna */}
-        <div className="absolute top-0 left-0 h-full w-10 z-10 hidden lg:block">
-          <svg
-            viewBox="0 0 100 100"
-            preserveAspectRatio="none"
-            className="h-full w-full"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M100,0 C80,50 80,50 100,100 L0,100 L0,0 Z"
-              fill="#ffffff"
-              className="dark:fill-neutral-900"
-            />
-          </svg>
+        {/* Partículas flotantes decorativas */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-primary/20 rounded-full animate-bounce" style={{ animationDelay: '0s', animationDuration: '3s' }} />
+          <div className="absolute top-3/4 left-3/4 w-1 h-1 bg-accent/30 rounded-full animate-bounce" style={{ animationDelay: '1s', animationDuration: '4s' }} />
+          <div className="absolute top-1/2 left-1/3 w-1.5 h-1.5 bg-primary/15 rounded-full animate-bounce" style={{ animationDelay: '2s', animationDuration: '5s' }} />
         </div>
 
         {/* Contenido del login */}
-        <LoginContainer />
-      </div>
-    </div>
+        <motion.div variants={itemVariants} className="relative z-10">
+          <LoginContainer />
+        </motion.div>
+      </motion.div>
+    </motion.div>
   );
 }
 
