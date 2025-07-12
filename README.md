@@ -1,7 +1,7 @@
 # Sistema de Seguimiento Documentario (SGD) - Municipalidad Distrital de Kimbiri
 
 <p align="center">
-  <img src="https://res.cloudinary.com/dmr9ef5cl/image/upload/v1736513062/ar7rsbcqb9xqogx8tftq.png" alt="Logo Kimbiri" width="120" />
+  <img src="https://res.cloudinary.com/dmr9ef5cl/image/upload/v1745974829/srbf6xjhhnx8nw3siozq.png" alt="Logo Kimbiri" width="120" />
 </p>
 
 <p align="center">
