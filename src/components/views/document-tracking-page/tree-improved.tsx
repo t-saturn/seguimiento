@@ -9,27 +9,17 @@ import {
 import { useEffect, useRef, useState } from "react";
 import {
   FileText,
-  MapPin,
-  Clock,
-  CheckCircle2,
   AlertTriangle,
   Building,
   User2,
   Calendar,
-  ArrowDown,
   Package,
-  Truck,
   FileCheck,
-  Timer,
-  Activity,
   Copy,
 } from "lucide-react";
 import { toBlob } from "html-to-image";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { calcularDiferenciaEnDias } from "@/utils/dayDifference";
-import { SiGoogledocs } from "react-icons/si";
-import { FaLongArrowAltRight } from "react-icons/fa";
 import { toast } from "sonner";
 
 export interface DocumentTrackingProps {
@@ -88,27 +78,6 @@ export default function TreeImproved({
         console.error("Error copiando imagen:", err);
         toast.error("Tu navegador no soporta copiar imágenes.");
       }
-    }
-  };
-
-  const getEstadoInfo = (estado: string | null | undefined) => {
-    if (!estado)
-      return {
-        icon: AlertTriangle,
-        color: "text-muted-foreground",
-        bg: "bg-muted",
-      };
-
-    switch (estado.toLowerCase()) {
-      case "recibido":
-      case "completado":
-        return { icon: CheckCircle2, color: "text-chart-1", bg: "bg-chart-1" };
-      case "pendiente":
-        return { icon: Timer, color: "text-chart-3", bg: "bg-chart-3" };
-      case "en proceso":
-        return { icon: Activity, color: "text-chart-2", bg: "bg-chart-2" };
-      default:
-        return { icon: Clock, color: "text-chart-4", bg: "bg-chart-4" };
     }
   };
 
