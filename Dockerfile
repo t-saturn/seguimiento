@@ -16,9 +16,6 @@ RUN chmod +x node_modules/.bin/next
 # Copiar todo el proyecto
 COPY . .
 
-# Copiar archivo de entorno desde carpeta `envs`
-COPY envs/.env.gra .env.local
-
 # Build de la app Next.js
 RUN npm run build
 
